@@ -23,12 +23,12 @@ void main() async {
     );
   });
 
-  // 🔥 Middleware para permitir CORS (necesario en Flutter Web)
+
   final handler = const Pipeline()
       .addMiddleware(logRequests())
       .addMiddleware((innerHandler) {
     return (request) async {
-      // Si es una pre-solicitud OPTIONS, devolvemos cabeceras de CORS
+      
       if (request.method == 'OPTIONS') {
         return Response.ok('', headers: _corsHeaders);
       }
@@ -38,7 +38,7 @@ void main() async {
     };
   }).addHandler(app);
 
-  // Servidor en localhost:8081
+ 
   final server = await io.serve(handler, 'localhost', 8081);
   print('✅ API Reports corriendo en http://${server.address.host}:${server.port}');
 }
